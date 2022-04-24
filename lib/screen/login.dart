@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:login_flutter/components/inputTextStyle.dart';
 
-class loginScreen extends StatelessWidget {
+class loginScreen extends StatefulWidget {
   const loginScreen({Key? key}) : super(key: key);
 
   @override
+  State<loginScreen> createState() => _loginScreenState();
+}
+
+class _loginScreenState extends State<loginScreen> {
+  bool _passwordVisible = true;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+      body: SizedBox(
         width: double.maxFinite,
         height: double.maxFinite,
         child: Stack(
@@ -26,8 +31,9 @@ class loginScreen extends StatelessWidget {
                 padding: EdgeInsets.all(25),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(25),
-                      topRight: Radius.circular(25)),
+                    topLeft: Radius.circular(25),
+                    topRight: Radius.circular(25),
+                  ),
                   color: Colors.grey,
                 ),
                 child: Column(
@@ -41,47 +47,74 @@ class loginScreen extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    Container(
-                      padding: EdgeInsets.all(28),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          inputTextStyle(
-                            nome: "Email",
-                            hintName: "Your email id",
-                          ),
-                          SizedBox(height: 10),
-                          inputTextStyle(
-                            nome: "Password",
-                            hintName: "Password",
-                            isPassword: true,
-                          ),
-                          TextButton(
-                            onPressed: () {},
-                            style: TextButton.styleFrom(primary: Colors.white),
-                            child: Text(
-                              "Forget password?",
+                    Expanded(
+                      child: Container(
+                        padding: EdgeInsets.all(28),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Email",
                               style: TextStyle(
-                                fontSize: 16,
+                                  fontSize: 20, fontFamily: "MPLUSRounded1c"),
+                            ),
+                            TextField(
+                              decoration:
+                                  InputDecoration(hintText: "Your email id"),
+                            ),
+                            SizedBox(height: 10),
+                            Text(
+                              "Password",
+                              style: TextStyle(
+                                fontSize: 20,
                                 fontFamily: "MPLUSRounded1c",
-                                color: Colors.black,
                               ),
                             ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: Text(
-                              "Login",
+                            TextField(
+                              obscureText: _passwordVisible,
+                              decoration: InputDecoration(
+                                hintText: "Password",
+                                suffixIcon: IconButton(
+                                  icon: Icon(_passwordVisible
+                                      ? Icons.visibility_off
+                                      : Icons.visibility),
+                                  onPressed: () {
+                                    _toggle();
+                                  },
+                                ),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {},
                               style:
-                                  TextStyle(fontSize: 30, color: Colors.black),
+                                  TextButton.styleFrom(primary: Colors.white),
+                              child: Text(
+                                "Forget password?",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontFamily: "MPLUSRounded1c",
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
-                            style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30.0)),
-                              primary: Colors.white,
-                              fixedSize: Size(double.maxFinite, 50),
+                            ElevatedButton(
+                              onPressed: () {},
+                              child: Text(
+                                "Login",
+                                style: TextStyle(
+                                  fontSize: 30,
+                                  color: Colors.black,
+                                ),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(30.0)),
+                                primary: Colors.white,
+                                fixedSize: Size(double.maxFinite, 50),
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ],
@@ -92,5 +125,11 @@ class loginScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _toggle() {
+    setState(() {
+      _passwordVisible = !_passwordVisible;
+    });
   }
 }

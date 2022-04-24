@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 
 class inputTextStyle extends StatelessWidget {
-  const inputTextStyle(
-      {Key? key,
-      required this.nome,
-      required this.hintName,
-      this.isPassword = false})
-      : super(key: key);
+
+
+  inputTextStyle({
+    Key? key,
+    required this.nome,
+    required this.hintName,
+    this.isPassword = false,
+  }) : super(key: key);
 
   final String? nome;
   final String? hintName;
   final bool? isPassword;
-
+  bool _passwordVisible = false;
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +31,13 @@ class inputTextStyle extends StatelessWidget {
                 decoration: InputDecoration(
                   hintText: "${hintName}",
                   suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.remove_red_eye),
+                    icon: Icon(_passwordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                    onPressed: () {
+                      
+                      print(_passwordVisible);
+                    },
                   ),
                 ),
               )
