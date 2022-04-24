@@ -1,36 +1,37 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class loginScreen extends StatefulWidget {
-  const loginScreen({Key? key}) : super(key: key);
+class login extends StatefulWidget {
+  const login({Key? key}) : super(key: key);
 
   @override
-  State<loginScreen> createState() => _loginScreenState();
+  State<login> createState() => _loginState();
 }
 
-class _loginScreenState extends State<loginScreen> {
+class _loginState extends State<login> {
   bool _passwordVisible = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Stack(
-          children: [
-            Image.asset(
-              "images/person.png",
-              width: double.maxFinite,
-              height: MediaQuery.of(context).size.height * 0.4,
-              fit: BoxFit.cover,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Colors.white.withOpacity(1),
+            pinned: false,
+            expandedHeight: MediaQuery.of(context).size.height * 0.2,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.asset(
+                "images/person.png",
+                width: double.maxFinite,
+                fit: BoxFit.cover,
+              ),
             ),
-            Positioned.fill(
-              top: 170,
-              child: SingleChildScrollView(
-                reverse: true,
-                child: Container(
-                  height: MediaQuery.of(context).size.height * .90,
+          ),
+          SliverList(
+            delegate: SliverChildListDelegate(
+              [
+                Container(
+                  height: MediaQuery.of(context).size.height,
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.all(25),
                   decoration: BoxDecoration(
@@ -52,7 +53,7 @@ class _loginScreenState extends State<loginScreen> {
                         ),
                       ),
                       Container(
-                        padding: EdgeInsets.all(28),
+                        padding: EdgeInsets.all(20),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -87,18 +88,23 @@ class _loginScreenState extends State<loginScreen> {
                                 ),
                               ),
                             ),
-                            TextButton(
-                              onPressed: () {},
-                              style:
-                                  TextButton.styleFrom(primary: Colors.white),
-                              child: Text(
-                                "Forget password?",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontFamily: "MPLUSRounded1c",
-                                  color: Colors.black,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                TextButton(
+                                  onPressed: () {},
+                                  style:
+                                      TextButton.styleFrom(primary: Colors.white),
+                                  child: Text(
+                                    "Forget password?",
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontFamily: "MPLUSRounded1c",
+                                      color: Colors.black,
+                                    ),
+                                  ),
                                 ),
-                              ),
+                              ],
                             ),
                             ElevatedButton(
                               onPressed: () {},
@@ -111,8 +117,7 @@ class _loginScreenState extends State<loginScreen> {
                               ),
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
-                                    borderRadius:
-                                        BorderRadius.circular(30.0)),
+                                    borderRadius: BorderRadius.circular(30.0)),
                                 primary: Colors.white,
                                 fixedSize: Size(double.maxFinite, 50),
                               ),
@@ -122,7 +127,9 @@ class _loginScreenState extends State<loginScreen> {
                               children: [
                                 Text(
                                   "Don't have an account ?",
-                                  style: TextStyle(fontSize: 16),
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                  ),
                                 ),
                                 TextButton(
                                   onPressed: () {},
@@ -131,7 +138,7 @@ class _loginScreenState extends State<loginScreen> {
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontSize: 16,
-                                        fontWeight: FontWeight.w900),
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 )
                               ],
@@ -161,17 +168,27 @@ class _loginScreenState extends State<loginScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(height: 30,),
+                            SizedBox(
+                              height: 16,
+                            ),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
                                 IconButton(
                                   onPressed: () {},
-                                  icon: Icon(Icons.mail),
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.google,
+                                    size: 50,
+                                    color: Colors.white,
+                                  ),
                                 ),
                                 IconButton(
                                   onPressed: () {},
-                                  icon: Icon(Icons.face),
+                                  icon: FaIcon(
+                                    FontAwesomeIcons.facebook,
+                                    size: 50,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ],
                             ),
@@ -180,11 +197,11 @@ class _loginScreenState extends State<loginScreen> {
                       ),
                     ],
                   ),
-                ),
-              ),
+                )
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
