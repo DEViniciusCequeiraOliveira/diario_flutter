@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'screen/login.dart';
+import 'package:login_flutter/screen/signUpPage.dart';
+import 'screen/loginPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       
       theme: ThemeData(fontFamily: "MPLUSRounded1c"),
-      home: login()
+      home: loginPage()
     );
   }
 }

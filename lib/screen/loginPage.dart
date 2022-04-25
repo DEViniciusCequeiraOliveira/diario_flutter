@@ -1,19 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:login_flutter/components/buttonStyle.dart';
+import 'package:login_flutter/components/inputStyleDate.dart';
+import 'package:login_flutter/components/inputStylePassword.dart';
+import 'package:login_flutter/components/titlePage.dart';
+import 'package:login_flutter/screen/signUpPage.dart';
 
-class login extends StatefulWidget {
-  const login({Key? key}) : super(key: key);
+class loginPage extends StatefulWidget {
+  const loginPage({Key? key}) : super(key: key);
 
   @override
-  State<login> createState() => _loginState();
+  State<loginPage> createState() => _loginPageState();
 }
 
-class _loginState extends State<login> {
+class _loginPageState extends State<loginPage> {
   bool _passwordVisible = true;
   @override
   Widget build(BuildContext context) {
     final avaibleHeight =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -53,50 +59,16 @@ class _loginState extends State<login> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Log-in",
-                        style: TextStyle(
-                          fontSize: 38,
-                          fontFamily: "Times New Roman",
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
+                      titlePage(title: "Log-in"),
                       Container(
                         padding: EdgeInsets.all(20),
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              "Email",
-                              style: TextStyle(
-                                  fontSize: 20, fontFamily: "MPLUSRounded1c"),
+                            inputStyleDate(
+                              inputName: "Email",
+                              hintTextName: "Your email id",
                             ),
-                            TextField(
-                              decoration:
-                                  InputDecoration(hintText: "Your email id"),
-                            ),
-                            SizedBox(height: 10),
-                            Text(
-                              "Password",
-                              style: TextStyle(
-                                fontSize: 20,
-                                fontFamily: "MPLUSRounded1c",
-                              ),
-                            ),
-                            TextField(
-                              obscureText: _passwordVisible,
-                              decoration: InputDecoration(
-                                hintText: "Password",
-                                suffixIcon: IconButton(
-                                  icon: Icon(_passwordVisible
-                                      ? Icons.visibility_off
-                                      : Icons.visibility),
-                                  onPressed: () {
-                                    _toggle();
-                                  },
-                                ),
-                              ),
-                            ),
+                            inputStylePassword(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -117,22 +89,7 @@ class _loginState extends State<login> {
                                 ),
                               ],
                             ),
-                            ElevatedButton(
-                              onPressed: () {},
-                              child: Text(
-                                "Login",
-                                style: TextStyle(
-                                  fontSize: 30,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(30.0)),
-                                primary: Colors.white,
-                                fixedSize: Size(double.maxFinite, 50),
-                              ),
-                            ),
+                            buttonStyle(name: "Login"),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -147,7 +104,14 @@ class _loginState extends State<login> {
                                     primary: Colors.white,
                                     shadowColor: Colors.black,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => signUpPage(),
+                                      ),
+                                    );
+                                  },
                                   child: Text(
                                     "Sign-up",
                                     style: TextStyle(
@@ -218,11 +182,5 @@ class _loginState extends State<login> {
         ],
       ),
     );
-  }
-
-  void _toggle() {
-    setState(() {
-      _passwordVisible = !_passwordVisible;
-    });
   }
 }
