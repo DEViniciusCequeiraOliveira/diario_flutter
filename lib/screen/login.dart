@@ -12,13 +12,15 @@ class _loginState extends State<login> {
   bool _passwordVisible = true;
   @override
   Widget build(BuildContext context) {
+    final avaibleHeight =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
-            backgroundColor: Colors.white.withOpacity(1),
+            backgroundColor: Colors.transparent,
             pinned: false,
-            expandedHeight: MediaQuery.of(context).size.height * 0.2,
+            expandedHeight: avaibleHeight * 0.3,
             flexibleSpace: FlexibleSpaceBar(
               background: Image.asset(
                 "images/person.png",
@@ -31,15 +33,22 @@ class _loginState extends State<login> {
             delegate: SliverChildListDelegate(
               [
                 Container(
-                  height: MediaQuery.of(context).size.height,
+                  height: avaibleHeight,
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.all(25),
                   decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        Colors.white,
+                        Colors.grey,
+                      ],
+                    ),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(25),
                       topRight: Radius.circular(25),
                     ),
-                    color: Colors.grey,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -93,8 +102,10 @@ class _loginState extends State<login> {
                               children: [
                                 TextButton(
                                   onPressed: () {},
-                                  style:
-                                      TextButton.styleFrom(primary: Colors.white),
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    shadowColor: Colors.black,
+                                  ),
                                   child: Text(
                                     "Forget password?",
                                     style: TextStyle(
@@ -132,11 +143,14 @@ class _loginState extends State<login> {
                                   ),
                                 ),
                                 TextButton(
+                                  style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    shadowColor: Colors.black,
+                                  ),
                                   onPressed: () {},
                                   child: Text(
                                     "Sign-up",
                                     style: TextStyle(
-                                        color: Colors.white,
                                         fontSize: 16,
                                         fontWeight: FontWeight.w700),
                                   ),
@@ -184,7 +198,7 @@ class _loginState extends State<login> {
                                 ),
                                 IconButton(
                                   onPressed: () {},
-                                  icon: FaIcon(
+                                  icon: const FaIcon(
                                     FontAwesomeIcons.facebook,
                                     size: 50,
                                     color: Colors.white,
