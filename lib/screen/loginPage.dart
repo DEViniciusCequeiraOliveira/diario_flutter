@@ -4,6 +4,7 @@ import 'package:login_flutter/components/buttonStyle.dart';
 import 'package:login_flutter/components/inputStyleDate.dart';
 import 'package:login_flutter/components/inputStylePassword.dart';
 import 'package:login_flutter/components/titlePage.dart';
+import 'package:login_flutter/screen/forgotPasswordPage.dart';
 import 'package:login_flutter/screen/signUpPage.dart';
 
 class loginPage extends StatefulWidget {
@@ -39,7 +40,6 @@ class _loginPageState extends State<loginPage> {
             delegate: SliverChildListDelegate(
               [
                 Container(
-                  height: avaibleHeight,
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.all(25),
                   decoration: BoxDecoration(
@@ -63,6 +63,7 @@ class _loginPageState extends State<loginPage> {
                       Container(
                         padding: EdgeInsets.all(20),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             inputStyleDate(
                               inputName: "Email",
@@ -73,7 +74,15 @@ class _loginPageState extends State<loginPage> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            forgotPasswordPage(),
+                                      ),
+                                    );
+                                  },
                                   style: TextButton.styleFrom(
                                     primary: Colors.white,
                                     shadowColor: Colors.black,

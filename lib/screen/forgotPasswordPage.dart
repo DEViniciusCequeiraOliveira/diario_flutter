@@ -1,17 +1,19 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:login_flutter/components/buttonStyle.dart';
 import 'package:login_flutter/components/inputStyleDate.dart';
-import 'package:login_flutter/components/inputStylePassword.dart';
 import 'package:login_flutter/components/titlePage.dart';
+import 'package:login_flutter/screen/loginPage.dart';
 
-class signUpPage extends StatelessWidget {
-  const signUpPage({Key? key}) : super(key: key);
+class forgotPasswordPage extends StatelessWidget {
+  const forgotPasswordPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final avaibleHeight =
         MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
-        
+
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -31,7 +33,7 @@ class signUpPage extends StatelessWidget {
             delegate: SliverChildListDelegate(
               [
                 Container(
-        
+                  height: avaibleHeight,
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.all(25),
                   decoration: BoxDecoration(
@@ -49,29 +51,40 @@ class signUpPage extends StatelessWidget {
                     ),
                   ),
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      titlePage(title: "Sign-up"),
+                      titlePage(title: "Forgot password"),
                       Container(
                         padding: EdgeInsets.all(20),
                         child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
                             inputStyleDate(
-                              inputName: "Nome",
-                              hintTextName: "Your name",
+                                inputName: "Email",
+                                hintTextName: "Your email id"),
+                            SizedBox(
+                              height: 15,
                             ),
-                            inputStyleDate(
-                              inputName: "Email",
-                              hintTextName: "Your email-id",
+                            buttonStyle(name: "Submit"),
+                            SizedBox(
+                              height: 15,
                             ),
-                            inputStyleDate(
-                              inputName: "Contact no.",
-                              hintTextName: "Your contact number",
+                            TextButton(
+                              onPressed: () {
+                                Navigator.pop(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => loginPage(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                "Back to login",
+                                style: TextStyle(
+                                  color: Colors.black,
+                                ),
+                              ),
                             ),
-                            inputStylePassword(),
-                            inputStylePassword(namePassword: "Confirm password",),
-                            buttonStyle(name: "Sign up")
                           ],
                         ),
                       ),
